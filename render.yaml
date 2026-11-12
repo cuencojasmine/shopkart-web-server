@@ -1,0 +1,25 @@
+# Render Blueprint for the ShopKart backend (New > Blueprint), or create the
+# Web Service by hand as described in DEPLOYMENT.md. Secrets are not stored here:
+# paste them in Environment > "Add from .env".
+services:
+  - type: web
+    name: shopkart-server
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /_health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: IS_PROXIED
+        value: "true"
+      - key: DATABASE_CLIENT
+        value: postgres
+      - key: DATABASE_SSL
+        value: "true"
+      - key: DATABASE_POOL_MIN
+        value: "0"
+      - key: DATABASE_POOL_MAX
+        value: "5"
