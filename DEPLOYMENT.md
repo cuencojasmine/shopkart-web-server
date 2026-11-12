@@ -28,7 +28,7 @@ Never commit `.env`, `.env.render` or `.env.vercel`. They are git-ignored.
 ## 2. Cloudflare R2 (images)
 
 1. In **R2 Object Storage**, create a bucket named `shopkart-images`.
-2. Open the bucket, go to **Settings > Public Development URL** and click **Enable**. Copy the `https://pub-....r2.dev` address.
+2. Leave **Public Development URL** (r2.dev) **disabled**. Some internet providers block r2.dev, so the backend serves the images itself at `/images/<file>` (`src/middlewares/r2-images.ts`) and the bucket stays private.
 3. In **R2 > Manage API tokens**, create an API token with **Object Read & Write**, limited to `shopkart-images`. Copy the **Access Key ID**, the **Secret Access Key** and your **Account ID**.
 
 ## 3. Production environment file
@@ -59,10 +59,10 @@ R2_ACCOUNT_ID=<account id>
 R2_ACCESS_KEY_ID=<access key id>
 R2_SECRET_ACCESS_KEY=<secret access key>
 R2_BUCKET=shopkart-images
-R2_PUBLIC_URL=https://pub-xxxxxxxx.r2.dev
+R2_PUBLIC_URL=https://shopkart-server.onrender.com/images
 ```
 
-Fix `PUBLIC_URL` and `FRONTEND_URL` after steps 5 and 6 if Render or Vercel gives a different address.
+Fix `PUBLIC_URL`, `R2_PUBLIC_URL` and `FRONTEND_URL` after steps 5 and 6 if Render or Vercel gives a different address.
 
 ## 4. Copy the local data to Neon and the images to R2
 

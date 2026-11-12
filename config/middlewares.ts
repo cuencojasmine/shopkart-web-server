@@ -9,6 +9,8 @@ const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Middlewar
   return [
     'strapi::logger',
     'strapi::errors',
+    // GET /images/<file> streams product images from R2 (src/middlewares/r2-images.ts)
+    'global::r2-images',
     {
       name: 'strapi::security',
       config: {
